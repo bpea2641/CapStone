@@ -7,6 +7,12 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
 @Service
 public class OpenAiService {
 
@@ -16,14 +22,14 @@ public class OpenAiService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String apiUrl = "https://api.openai.com/v1/images/generations";
-
+    String apiKey = "";
     public String generateImage(String prompt) {
         try {
             RestTemplate restTemplate = new RestTemplate();
 
+            String apiUrl = "https://api.openai.com/v1/images/generations";
             // ChatGPTConfig에서 API 키 가져오기
-            String apiKey = "";
+
 
             // OpenAI API 호출
             HttpHeaders headers = new HttpHeaders();
@@ -47,6 +53,30 @@ public class OpenAiService {
             e.printStackTrace();
             return "Error generating image";
         }
+    }
+
+    public InputStream convertTextToSpeech(String text) throws Exception {
+        // OpenAI API를 호출하여 텍스트를 음성으로 변환하고 응답으로 mp3 파일을 받아오는 메서드
+
+        // OpenAI API 엔드포인트
+        String endpoint = "https://api.openai.com/v1/audio/speech";
+
+        // OpenAI API에 전송할 요청 바디 생성
+        String requestBody = "{\"text\": \"" + text + "\", \"input\": \"" + text + "\", \"voice\": \"nova\", \"model\": \"tts-1\"}";
+
+        // OpenAI API 요청에 필요한 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey); // OpenAI API 키 설정
+
+        // RestTemplate을 사용하여 API 호출
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+        ResponseEntity<byte[]> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, requestEntity, byte[].class);
+
+        // API 응답에서 음성 파일을 InputStream으로 반환
+        byte[] audioData = responseEntity.getBody();
+        return new ByteArrayInputStream(audioData);
     }
 }
 

@@ -38,4 +38,12 @@ public class ChatbotController {
     public String chatbot_image_edit() {
         return "/chatgpt/chatbot_image_edit";
     }
+    @GetMapping("/chatgpt/chatbot_texttospeech")
+    public String chatbot_texttospeech() {
+        return "/chatgpt/chatbot_texttospeech";
+    }
+    @GetMapping("/chatgpt/chatbot_speechtotext")
+    public String chatbot_speechtotext() {
+        return "/chatgpt/chatbot_speechtotext";
+    }
 }

@@ -1,89 +1,176 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chat with GPT</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css?after">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Inner Page - Resi Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+    <style>
+        /* style.css */
+
+      /* Chat container */
+      .chat-container {
+        margin: auto;
+        padding: 20px;
+        max-width: 800px;
+      }
+
+      /* Chat messages */
+      .chat-message {
+        margin-bottom: 20px;
+      }
+
+      .user-message {
+        background-color: #f3f4f6;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+
+      .bot-message {
+        background-color: #d0e8ff;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+
+      /* User input */
+      .user-input {
+        display: flex;
+        margin-bottom: 20px;
+      }
+
+      .user-input input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .user-input button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .user-input button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Chat history textarea */
+      .chat-area textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+    .chat-title {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    /* ChatGPT 설명 */
+    .chat-description {
+      font-size: 18px;
+      color: #666;
+      text-align: center;
+    }
+
+    </style>
 </head>
+
 <body>
-<form method="GET" th:action="@{/board/boardList}" th:value="${param.searchText}">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col">
-                <h2>개인 프로젝트</h2>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="searchText" name="searchText" placeholder="게시판 검색">
-                    <button type="submit" class="btn btn-primary">검색</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">            <!-- 기존의 메뉴 드롭다운 유지 -->
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    메뉴
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-center">
-                    <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-dark" onclick="main_botReq()">🤖 메인 챗봇</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-dark" onclick="psychology_botReq()">🤖 심리 챗봇</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-dark" onclick="story_botReq()">🤖 스토리 챗봇</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-dark" onclick="image_botReq()">🤖 이미지 챗봇</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-dark" onclick="image_transformation_botReq()">🤖 이미지 변형 챗봇</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="nav-link btn btn-dark" onclick="image_text_botReq()">🤖 이미지 설명 챗봇</button>
-                    </li>
-                </ul>
-            </div>
-            <ul class="navbar-nav me-auto">
-                <li>
-                    <button type="button" class="btn btn-dark" onclick="saveReq()">
-                        📝 글작성
-                    </button>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-inner-pages">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <h1 class="logo"><a href="index.html">CapStone Project</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+                <li><a class="nav-link scrollto" href="#about">About</a></li>
+                <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+                <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li onclick="pagingReq()"><a href="#">페이징</a></li>
+                        <li class="dropdown"><a href="#"><span>AI 메뉴</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li onclick="main_botReq()"><a href="#">메인 AI</a></li>
+                                <li onclick="psychology_botReq()"><a href="#">심리 AI</a></li>
+                                <li onclick="story_botReq()"><a href="#">스토리 AI</a></li>
+                                <li onclick="image_botReq()"><a href="#">이미지 생성 AI</a></li>
+                                <li onclick="image_transformation_botReq()"><a href="#">이미지 변형 AI</a></li>
+                                <li onclick="image_text_botReq()"><a href="#">이미지 설명 AI</a></li>
+                                <li onclick="image_edit_botReq()"><a href="#">이미지 편집 AI</a></li>
+                                <li onclick="text_to_speech_botReq()"><a href="#">텍스트 음성 변경 AI</a></li>
+                                <li onclick="speech_to_text_botReq()"><a href="#">음성 텍스트 변경 AI</a></li>
+                            </ul>
+                        </li>
+                        <li onclick="saveReq()"><a href="#">게시판 작성</a></li>
+                        <li onclick="listReq()"><a href="#">글 목록</a></li>
+                        <li onclick="logoutReq()"><a href="#">로그아웃</a></li>
+                    </ul>
                 </li>
+                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
                 <li>
-                    <button type="button" class="btn btn-dark" onclick="listReq()">
-                        📄 글목록
-                    </button>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-dark" onclick="pagingReq()">
-                        📑 페이징목록
-                    </button>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-dark" onclick="logoutReq()">
-                        🔒 로그아웃
-                    </button>
+                    <form method="GET" th:action="@{/board/boardList}" th:value="${param.searchText}">
+                        <div class="col">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="searchText" name="searchText" placeholder="게시판 검색">
+                                <button type="submit" class="btn btn-primary">검색</button>
+                            </div>
+                        </div>
+                    </form>
                 </li>
             </ul>
-        </div>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
     </div>
-</nav>
-    <div class="content">
+</header><!-- End Header -->
+
+<main id="main">
+    <div class="content" style="overflow: auto; width: 100%; height: 750px; word-break: break-all;">
         <header>
-            <h1>ChatGPT</h1>
-            <p>당신을 도와줄 전생 스토리 GPT 입니다.</p>
+            <h1 style="font-size: 24px; white-space: nowrap;">ChatGPT</h1>
+            <h1 style="font-size: 24px; white-space: nowrap;">ChatGPT</h1>
+            <h1 class="chat-title">Chat AI</h1>
+            <p class="chat-description">당신을 도와줄 전생 스토리 AI 입니다.</p>
         </header>
         <main>
             <div class="chat-container">
@@ -103,59 +190,151 @@
                     <button onclick="sendQuestion()">Send</button>
                 </div>
                 <div class="chat-area">
-                    <textarea id="chatHistory" rows="25" cols="100" readonly></textarea>
+                    <textarea id="chatHistory" rows="20" cols="100" readonly></textarea>
                 </div>
             </div>
         </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</main><!-- End #main -->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>CapStone</h3>
+                    <p>
+                        A108 Adam Street <br>
+                        New York, NY 535022<br>
+                        United States <br><br>
+                        <strong>Phone:</strong> +1 5589 55488 55<br>
+                        <strong>Email:</strong> info@example.com<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <h4>Join Our Newsletter</h4>
+                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+        <div class="me-md-auto text-center text-md-start">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Resi</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/resi-free-bootstrap-html-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+        <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+
 <script>
-document.getElementById("userInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendQuestion();
-    }
-});
-
-async function sendQuestion() {
-    const userInput = document.getElementById("userInput").value.trim();
-    if (!userInput) return; // 만약 입력하는게 없으면 리턴
-
-    const apiKey = ''; // API 비밀키, .env로 관리하는게 더 안정적
-    const model = 'gpt-4-0613'; // 내가 사용할 gpt 모델. 모델에 따라 엔드포인트, 토큰도 전부 다름
-    const headers = {
-        'Content-Type': 'application/json', // 해당 문법. json으로 설정
-        'Authorization': `Bearer ${apiKey}` // 위의 apikey 적용. 만약 apikey가 안맞으면 실행 안됨.
-    };
-    const messages = [
-        { role: 'system', content: 'You are a storyteller who gives the other person an interesting past life story.' }, // 내가 실행할 gpt의 컨셉(설정). 이 컨셉대로 답변을 해줌
-        { role: 'user', content: userInput } // 내가 질문할 대화.
-    ];
-
-    try { // 응답 실행.
-        const response = await fetch('https://api.openai.com/v1/chat/completions', { // 위의 모델의 엔드포인트. 모델마다 맞는 엔드포인트가 있으며 틀릴 시 실행 안됨.
-            method: 'POST', // 메소드 방식. 내가 보내고 서버에서 응답하는 것이기 때문에 POST
-            headers: headers, // 위의 headers를 적용시키고
-            body: JSON.stringify({ model, messages }) // json.stringify로 model, messages의 정보를 json으로 변경시켜서 받음
-        });
-
-        if (!response.ok) { // 만약 반응이 없으면 오류 메세지 출력
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    document.getElementById("userInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            sendQuestion();
         }
+    });
 
-        const responseData = await response.json();
-        const botResponse = responseData.choices[0].message.content;
+    async function sendQuestion() {
+        const userInput = document.getElementById("userInput").value.trim();
+        if (!userInput) return; // 만약 입력하는게 없으면 리턴
 
-        // Append user input and bot response to chat history
-        const chatHistory = document.getElementById("chatHistory"); // 챗 GPT가 데이터를 모아서 대답하는 방식.
-        chatHistory.value += `질문자: ${userInput}\nChat GPT: ${botResponse}\n\n`; // 위의 userinput에서 전달 이후 textarea 쪽에 보여질 문답들.
+        const apiKey = ''; // API 비밀키, .env로 관리하는게 더 안정적
+        const model = 'gpt-4-0613'; // 내가 사용할 gpt 모델. 모델에 따라 엔드포인트, 토큰도 전부 다름
+        const headers = {
+            'Content-Type': 'application/json', // 해당 문법. json으로 설정
+            'Authorization': `Bearer ${apiKey}` // 위의 apikey 적용. 만약 apikey가 안맞으면 실행 안됨.
+        };
+        const messages = [
+            { role: 'system', content: 'You are a storyteller who gives the other person an interesting past life story.' }, // 내가 실행할 gpt의 컨셉(설정). 이 컨셉대로 답변을 해줌
+            { role: 'user', content: userInput } // 내가 질문할 대화.
+        ];
 
-        // Clear input field after sending question
-        document.getElementById("userInput").value = ""; // 질문 응답 한 다음 input을 비움.
-    } catch (error) { // 응답 에러시 오류 메시지 출력
-        console.error('Error:', error);
-        alert('Sorry, something went wrong.');
+        try { // 응답 실행.
+            const response = await fetch('https://api.openai.com/v1/chat/completions', { // 위의 모델의 엔드포인트. 모델마다 맞는 엔드포인트가 있으며 틀릴 시 실행 안됨.
+                method: 'POST', // 메소드 방식. 내가 보내고 서버에서 응답하는 것이기 때문에 POST
+                headers: headers, // 위의 headers를 적용시키고
+                body: JSON.stringify({ model, messages }) // json.stringify로 model, messages의 정보를 json으로 변경시켜서 받음
+            });
+
+            if (!response.ok) { // 만약 반응이 없으면 오류 메세지 출력
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            const botResponse = responseData.choices[0].message.content;
+
+            // Append user input and bot response to chat history
+            const chatHistory = document.getElementById("chatHistory"); // 챗 GPT가 데이터를 모아서 대답하는 방식.
+            chatHistory.value += `질문자: ${userInput}\nChat GPT: ${botResponse}\n\n`; // 위의 userinput에서 전달 이후 textarea 쪽에 보여질 문답들.
+
+            // Clear input field after sending question
+            document.getElementById("userInput").value = ""; // 질문 응답 한 다음 input을 비움.
+        } catch (error) { // 응답 에러시 오류 메시지 출력
+            console.error('Error:', error);
+            alert('Sorry, something went wrong.');
+        }
     }
-}
     const saveReq = () => {
         location.href = "/board/save";
     }
@@ -186,6 +365,16 @@ async function sendQuestion() {
     const image_text_botReq = () => {
         location.href = "/chatgpt/chatbot_image_text";
     }
+    const image_edit_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_edit";
+    }
+    const text_to_speech_botReq = () => {
+        location.href = "/chatgpt/chatbot_texttospeech";
+    }
+    const speech_to_text_botReq = () => {
+        location.href = "/chatgpt/chatbot_speechtotext";
+    }
 </script>
 </body>
-</html>
+
+</html>z

@@ -1,0 +1,25 @@
+spring:
+  application:
+  name: capstone
+
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1/member?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: bpea2641
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true #??? ? ??, ???? sql ?? ??
+    open-in-view: false # ?? = ture, ??? ?? ??? false.
+    generate-ddl: true # hibernate ??? jpa?? ??? ??, entity? ??? ? ???? ???? ??
+    hibernate:
+      ddl-auto: update # entity? ??? column? ???? ???? ??, create? ?? ????.
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      maxFileSize=200MB
+      maxRequestSize=200MB

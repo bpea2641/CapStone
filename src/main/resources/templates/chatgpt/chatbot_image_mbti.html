@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Inner Page - Resi Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <style>
+    /* style.css */
+
+  /* Chat container */
+  .chat-container {
+    margin: auto;
+    padding: 20px;
+    max-width: 800px;
+  }
+
+  /* Chat messages */
+  .chat-message {
+    margin-bottom: 20px;
+  }
+
+  .user-message {
+    background-color: #f3f4f6;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .bot-message {
+    background-color: #d0e8ff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  /* User input */
+  .user-input {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .user-input input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .user-input button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .user-input button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Chat history textarea */
+  .chat-area textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+.chat-title {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* ChatGPT 설명 */
+.chat-description {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+}
+
+  </style>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-inner-pages">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <h1 class="logo"><a href="/Resi/index">CapStone Project</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#about">About</a></li>
+        <li><a class="nav-link scrollto" href="#services">Services</a></li>
+        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+        <li><a class="nav-link scrollto" href="#team">Team</a></li>
+        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li onclick="pagingReq()"><a href="#">페이징</a></li>
+            <li class="dropdown"><a href="#"><span>AI 메뉴</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li onclick="main_botReq()"><a href="#">메인 AI</a></li>
+                <li onclick="psychology_botReq()"><a href="#">심리 AI</a></li>
+                <li onclick="story_botReq()"><a href="#">스토리 AI</a></li>
+                <li onclick="mbti_botReq()"><a href="#">MBTI AI</a></li>
+                <li onclick="image_botReq()"><a href="#">이미지 생성 AI</a></li>
+                <li onclick="image_transformation_botReq()"><a href="#">이미지 변형 AI</a></li>
+                <li onclick="image_text_botReq()"><a href="#">이미지 설명 AI</a></li>
+                <li onclick="image_edit_botReq()"><a href="#">이미지 편집 AI</a></li>
+                <li onclick="image_mbti_botReq()"><a href="#">이미지 MBTI AI</a></li>
+                <li onclick="text_to_speech_botReq()"><a href="#">텍스트 음성 변경 AI</a></li>
+                <li onclick="speech_to_text_botReq()"><a href="#">음성 텍스트 변경 AI</a></li>
+              </ul>
+            </li>
+            <li onclick="saveReq()"><a href="#">게시판 작성</a></li>
+            <li onclick="listReq()"><a href="#">글 목록</a></li>
+            <li onclick="logoutReq()"><a href="#">로그아웃</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+        <li>
+          <form method="GET" th:action="@{/board/boardList}" th:value="${param.searchText}">
+            <div class="col">
+              <div class="input-group">
+                <input type="text" class="form-control" id="searchText" name="searchText" placeholder="게시판 검색">
+                <button type="submit" class="btn btn-primary">검색</button>
+              </div>
+            </div>
+          </form>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+<main id="main">
+  <div class="content" style="overflow: auto; width: 100%; height: 750px; word-break: break-all;">
+    <header>
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1 class="chat-title">Image AI</h1>
+      <p class="chat-description">당신을 도와줄 이미지 AI 입니다. 인물의 MBTI를 뽑아보세요!</p>
+    </header>
+    <main>
+      <div class="chat-container">
+        <div class="chat">
+          <div class="chat-message">
+            <div class="user-message">
+              How can I help you today?
+            </div>
+            <div class="bot-message">
+              I'm here to help with any questions you have!
+            </div>
+          </div>
+          <!-- More chat messages go here -->
+        </div>
+        <form id="imageUploadForm" enctype="multipart/form-data">
+          <input type="file" id="imageFile" accept="image/*" onchange="updateImage()">
+          <button type="button" onclick="uploadImage()">Upload</button>
+        </form>
+        <div class="content">
+          <p>설명할 이미지</p>
+          <img id="boardImage" alt="">
+        </div>
+        <hr>
+
+        <h1>Result</h1>
+        <p id="result"></p>
+      </div>
+    </main>
+  </div>
+</main><!-- End #main -->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h3>CapStone</h3>
+          <p>
+            A108 Adam Street <br>
+            New York, NY 535022<br>
+            United States <br><br>
+            <strong>Phone:</strong> +1 5589 55488 55<br>
+            <strong>Email:</strong> info@example.com<br>
+          </p>
+        </div>
+
+        <div class="col-lg-2 col-md-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4>Join Our Newsletter</h4>
+          <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+          <form action="" method="post">
+            <input type="email" name="email"><input type="submit" value="Subscribe">
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container d-md-flex py-4">
+
+    <div class="me-md-auto text-center text-md-start">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Resi</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/resi-free-bootstrap-html-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+    <div class="social-links text-center text-md-right pt-3 pt-md-0">
+      <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+      <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+
+<script>
+  function uploadImage() {
+      var fileInput = document.getElementById('imageFile');
+      var file = fileInput.files[0];
+      var formData = new FormData();
+      formData.append('file', file);
+
+      fetch('/ask-mbti', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json()) // JSON 형식으로 응답을 파싱
+      .then(data => {
+          // JSON 형식으로 파싱된 응답 데이터를 처리
+          document.getElementById('result').innerText = data.choices[0].message.content;
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+  }
+
+    function updateImage() {
+        var fileInput = document.getElementById('imageFile');
+        var boardImage = document.getElementById('boardImage');
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                boardImage.src = e.target.result;
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+    const saveReq = () => {
+        location.href = "/board/save";
+    }
+    const listReq = () => {
+        location.href = "/board/list";
+    }
+    const pagingReq = () => {
+        location.href = "/board/paging";
+    }
+    const logoutReq = () => {
+        location.href = "/member/logout";
+    }
+    const main_botReq = () => {
+        location.href = "/chatgpt/chatbot_main";
+    }
+    const psychology_botReq = () => {
+        location.href = "/chatgpt/chatbot_psychology";
+    }
+    const story_botReq = () => {
+        location.href = "/chatgpt/chatbot_story";
+    }
+    const mbti_botReq = () => {
+        location.href = "/chatgpt/chatbot_mbti";
+    }
+    const image_botReq = () => {
+        location.href = "/chatgpt/chatbot_image";
+    }
+    const image_transformation_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_transformation";
+    }
+    const image_text_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_text";
+    }
+    const image_edit_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_edit";
+    }
+    const image_mbti_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_mbti";
+    }
+    const text_to_speech_botReq = () => {
+        location.href = "/chatgpt/chatbot_texttospeech";
+    }
+    const speech_to_text_botReq = () => {
+        location.href = "/chatgpt/chatbot_speechtotext";
+    }
+</script>
+
+</body>
+
+</html>

@@ -148,4 +148,17 @@ public class BoardService {
         return boardDTOS;
     }
 
+    @Transactional
+    public List<BoardEntity> getLatestPosts(int pageSize) {
+        Pageable pageable = PageRequest.of(0, pageSize, Sort.by("updatedTime").descending());
+        Page<BoardEntity> page = boardRepository.findAll(pageable);
+        // FetchType을 EAGER로 설정하여 파일 첨부 및 댓글 목록을 즉시 로딩합니다.
+        List<BoardEntity> latestPosts = page.getContent();
+        latestPosts.forEach(post -> {
+            post.getBoardFileEntityList().size(); // 파일 첨부 목록 로딩
+            post.getCommentEntityList().size(); // 댓글 목록 로딩
+        });
+        return latestPosts;
+    }
+
 }

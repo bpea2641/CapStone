@@ -25,7 +25,7 @@ public class ImageDescriptionController {
 //                .path("/images/")
 //                .path(fileName)
 //                .toUriString(); // 만약 정상적인 도메인이 있었다면 해당 코드가 작동
-        return "https://cf24-220-89-47-156.ngrok-free.app/images/" + fileName;
+        return "https://17fb-220-89-47-150.ngrok-free.app/images/" + fileName;
     }
 
     @PostMapping("/ask-image")

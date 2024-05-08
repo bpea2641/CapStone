@@ -8,6 +8,7 @@
   <title>CapStone Project - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">
@@ -39,39 +40,55 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+  <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">CapStone Project</a></h1>
+      <h1 class="logo"><a href="/Resi/index">CapStone Project</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/Resi/inner_page">inner_page</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <li><a href="/board/paging">페이징</a></li>
+              <li class="dropdown"><a href="#"><span>AI 메뉴</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="/chatgpt/chatbot_main">메인 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_psychology">심리 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_story">스토리 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_mbti">MBTI AI</a></li>
+                  <li><a href="/chatgpt/chatbot_image">이미지 생성 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_image_transformation">이미지 변형 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_image_text">이미지 설명 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_image_edit">이미지 편집 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_image_mbti">이미지 MBTI AI</a></li>
+                  <li><a href="/chatgpt/chatbot_speechtotext">음성 텍스트 변경 AI</a></li>
+                  <li><a href="/chatgpt/chatbot_speechtotext">음성 텍스트 변경 AI</a></li>
                 </ul>
               </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="/board/save">게시판 작성</a></li>
+              <li><a href="/board/list">글 목록</a></li>
+              <li><a href="/member/logout">로그아웃</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li>
+            <form method="GET" th:action="@{/board/boardList}" th:value="${param.searchText}">
+              <div class="col">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="searchText" name="searchText" placeholder="게시판 검색">
+                  <button type="submit" class="btn btn-primary">검색</button>
+                </div>
+              </div>
+            </form>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -296,67 +313,67 @@
           <div class="col-lg-3 col-md-4">
             <div class="icon-box">
               <i class="ri-store-line" style="color: #ffbb2c;"></i>
-              <h3><a href="">기본 AI 문답</a></h3>
+              <h3><a href="/chatgpt/chatbot_main">기본 AI 문답</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-              <h3><a href="">전생 스토리</a></h3>
+              <h3><a href="/chatgpt/chatbot_story">전생 스토리</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-              <h3><a href="">심리 상담</a></h3>
+              <h3><a href="/chatgpt/chatbot_psychology">심리 상담</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-              <h3><a href="">AI 이미지 생성</a></h3>
+              <h3><a href="/chatgpt/chatbot_image">AI 이미지 생성</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-database-2-line" style="color: #47aeff;"></i>
-              <h3><a href="">AI 이미지 변형</a></h3>
+              <h3><a href="/chatgpt/chatbot_image_transformation">AI 이미지 변형</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-              <h3><a href="">AI 이미지 설명</a></h3>
+              <h3><a href="/chatgpt/chatbot_image_text">AI 이미지 설명</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-              <h3><a href="">AI 이미지 편집</a></h3>
+              <h3><a href="/chatgpt/chatbot_image_edit">AI 이미지 편집</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-              <h3><a href="">AI 텍스트 -> 음성</a></h3>
+              <h3><a href="/chatgpt/chatbot_texttospeech">AI 텍스트 -> 음성</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-anchor-line" style="color: #b2904f;"></i>
-              <h3><a href="">AI 음성 -> 텍스트</a></h3>
+              <h3><a href="/chatgpt/chatbot_speechtotext">AI 음성 -> 텍스트</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-disc-line" style="color: #b20969;"></i>
-              <h3><a href="">NEW MODEL</a></h3>
+              <h3><a href="/chatgpt/chatbot_mbti">MBTI AI</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
               <i class="ri-base-station-line" style="color: #ff5828;"></i>
-              <h3><a href="">NEW MODEL</a></h3>
+              <h3><a href="/chatgpt/chatbot_image_mbti">이미지 MBTI AI</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
@@ -385,31 +402,49 @@
           </div>
         </div>
 
-        <div class="row portfolio-container">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+        <div class="row portfolio-container" id="latestPosts">
+          <!-- 최신 게시물이 여기에 표시됩니다. -->
+          <div th:each="post : ${latestPosts}">
+            <div class="col-lg-4 col-md-6 portfolio-item">
+              <div class="portfolio-wrap">
+                <img th:if="${post.fileAttached == 1}" th:src="@{|/upload/${post.storedFileName}|}" class="img-fluid" alt="Board Image">
+                <div class="portfolio-info">
+                  <h4 th:text="${post.boardTitle}">Board Title</h4>
+                  <p>Board</p>
+                  <div class="portfolio-links">
+                    <a th:if="${post.fileAttached == 1}" th:href="@{|/board/${post.id}|}" title="More Details"><i class="bx bx-link"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="/assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+        <div class="row portfolio-container">
+            <div th:if="${#lists.size(boardList) > 0}">
+              <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="portfolio-wrap">
+                  <img th:if="${boardList[0].fileAttached == 1}" th:src="@{|/upload/${boardList[0].storedFileName}|}" class="img-fluid" alt="Board Image">
+                  <div class="portfolio-info">
+                    <h4 th:text="${boardList[0].boardTitle}">Board Title</h4>
+                    <p>Board</p>
+                    <div class="portfolio-links">
+                      <a th:if="${boardList[0].fileAttached == 1}" href="@{|/board/${boardList[0].id}|}" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <div th:if="${#lists.size(boardList) > 0}">
+            <div class="col-lg-4 col-md-6 portfolio-item">
+              <div class="portfolio-wrap">
+                <img th:if="${boardList[8].fileAttached == 1}" th:src="@{|/upload/${boardList[8].storedFileName}|}" class="img-fluid" alt="Board Image">
+                <div class="portfolio-info">
+                  <h4 th:text="${boardList[8].boardTitle}">Board Title</h4>
+                  <p>Board</p>
+                  <div class="portfolio-links">
+                    <a th:if="${boardList[8].fileAttached == 1}" href="@{|/board/${boardList[8].id}|}" title="More Details"><i class="bx bx-link"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -515,6 +550,7 @@
 
         </div>
 
+      </div>
       </div>
     </section><!-- End Portfolio Section -->
 
@@ -889,7 +925,74 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+<script>
+  // 최신 게시물을 가져오는 함수
+    function fetchLatestPosts() {
+      $.ajax({
+        url: "/latest-posts", // 최신 게시물을 가져오는 엔드포인트
+        type: "GET",
+        success: function(response) {
+          // 최신 게시물을 가져와서 #latestPosts 요소에 추가합니다.
+          $('#latestPosts').html(response);
+        },
+        error: function(xhr, status, error) {
+          console.error("Error fetching latest posts:", error);
+        }
+      });
+    }
 
+// 페이지 로드 후 최신 게시물을 가져옵니다.
+$(document).ready(function() {
+  fetchLatestPosts();
+});
+
+
+    const saveReq = () => {
+        location.href = "/board/save";
+    }
+    const listReq = () => {
+        location.href = "/board/list";
+    }
+    const pagingReq = () => {
+        location.href = "/board/paging";
+    }
+    const logoutReq = () => {
+        location.href = "/member/logout";
+    }
+    const main_botReq = () => {
+        location.href = "/chatgpt/chatbot_main";
+    }
+    const psychology_botReq = () => {
+        location.href = "/chatgpt/chatbot_psychology";
+    }
+    const story_botReq = () => {
+        location.href = "/chatgpt/chatbot_story";
+    }
+    const mbti_botReq = () => {
+        location.href = "/chatgpt/chatbot_mbti";
+    }
+    const image_botReq = () => {
+        location.href = "/chatgpt/chatbot_image";
+    }
+    const image_transformation_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_transformation";
+    }
+    const image_text_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_text";
+    }
+    const image_edit_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_edit";
+    }
+    const image_mbti_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_mbti";
+    }
+    const text_to_speech_botReq = () => {
+        location.href = "/chatgpt/chatbot_texttospeech";
+    }
+    const speech_to_text_botReq = () => {
+        location.href = "/chatgpt/chatbot_speechtotext";
+    }
+</script>
 </body>
 
 </html>

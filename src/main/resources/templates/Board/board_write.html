@@ -78,7 +78,7 @@
 <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center justify-content-between">
 
-        <h1 class="logo"><a href="index.html">CapStone Project</a></h1>
+        <h1 class="logo"><a href="/Resi/index">CapStone Project</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -97,10 +97,12 @@
                                 <li onclick="main_botReq()"><a href="#">메인 AI</a></li>
                                 <li onclick="psychology_botReq()"><a href="#">심리 AI</a></li>
                                 <li onclick="story_botReq()"><a href="#">스토리 AI</a></li>
+                                <li onclick="mbti_botReq()"><a href="#">MBTI AI</a></li>
                                 <li onclick="image_botReq()"><a href="#">이미지 생성 AI</a></li>
                                 <li onclick="image_transformation_botReq()"><a href="#">이미지 변형 AI</a></li>
                                 <li onclick="image_text_botReq()"><a href="#">이미지 설명 AI</a></li>
                                 <li onclick="image_edit_botReq()"><a href="#">이미지 편집 AI</a></li>
+                                <li onclick="image_mbti_botReq()"><a href="#">이미지 MBTI AI</a></li>
                                 <li onclick="text_to_speech_botReq()"><a href="#">텍스트 음성 변경 AI</a></li>
                                 <li onclick="speech_to_text_botReq()"><a href="#">음성 텍스트 변경 AI</a></li>
                             </ul>
@@ -274,6 +276,9 @@
     const story_botReq = () => {
         location.href = "/chatgpt/chatbot_story";
     }
+    const mbti_botReq = () => {
+        location.href = "/chatgpt/chatbot_mbti";
+    }
     const image_botReq = () => {
         location.href = "/chatgpt/chatbot_image";
     }
@@ -285,6 +290,9 @@
     }
     const image_edit_botReq = () => {
         location.href = "/chatgpt/chatbot_image_edit";
+    }
+    const image_mbti_botReq = () => {
+        location.href = "/chatgpt/chatbot_image_mbti";
     }
     const text_to_speech_botReq = () => {
         location.href = "/chatgpt/chatbot_texttospeech";

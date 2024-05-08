@@ -46,4 +46,20 @@ public class ChatbotController {
     public String chatbot_speechtotext() {
         return "/chatgpt/chatbot_speechtotext";
     }
+    @GetMapping("/chatgpt/chatbot_mbti")
+    public String chatbot_mbti() {
+        return "/chatgpt/chatbot_mbti";
+    }
+    @GetMapping("/chatgpt/chatbot_image_mbti")
+    public String chatbot_image_mbti() {
+        return "/chatgpt/chatbot_image_mbti";
+    }
+    @GetMapping("/chatgpt/chatbot_image_army")
+    public String chatbot_image_army() {
+        return "/chatgpt/chatbot_image_army";
+    }
+    @GetMapping("/chatgpt/chatbot_image_translation")
+    public String chatbot_image_translation() {
+        return "/chatgpt/chatbot_image_translation";
+    }
 }

@@ -21,7 +21,7 @@ public class ImageTranslation {
 //                .path("/images/")
 //                .path(fileName)
 //                .toUriString(); // 만약 정상적인 도메인이 있었다면 해당 코드가 작동
-        return "https://17fb-220-89-47-150.ngrok-free.app/images/" + fileName;
+        return "https://0d78-220-89-47-151.ngrok-free.app/images/" + fileName;
     }
 
     @PostMapping("/ask-translation")
